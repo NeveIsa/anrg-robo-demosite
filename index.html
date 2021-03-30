@@ -98,12 +98,12 @@ MQTT_HOST = $_GET['host'];
 ROBO_ID = $_GET['roboID'];
 
 
-if(!MQTT_PORT) MQTT_PORT = 8883;
+if(!MQTT_PORT) MQTT_PORT = 8084;
 if(!MQTT_HOST) MQTT_HOST = 'broker.emqx.io'
 
 
 if(!MQTT_HOST) alert('Provide MQTT_HOST using GET parameter: host=broker.emqx.io')
-if(!MQTT_PORT) alert('Provide MQTT_PORT using GET parameter: port=8883')
+if(!MQTT_PORT) alert('Provide MQTT_PORT using GET parameter: port=8084')
 if(!ROBO_ID) alert('Provide ROBO_ID using GET parameter: roboID')
 
 
