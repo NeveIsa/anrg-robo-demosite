@@ -60,7 +60,8 @@ border-radius: 1em;
 	
 	<div style=' --h:100vh; --w:50vw;'>
 		<div style='--mt:10%; --p:10%;'>
-			<button id='send' style='--bgc: rgba(250,0,0,0.5)'>SEND ALL COMMANDS</button>	
+			<button class='ctlbtn' style='--bgc: rgba(250,0,0,0.5)'>RUN</button>	
+			<button class='ctlbtn' style='--bgc: rgba(250,0,0,0.5)'>STOP</button>	
 		</div>
 
 		<div id='info' style='--m:10%; --c: gray; --weight:bold; --ofy: auto; --maxh:40vh'></div>
@@ -131,10 +132,10 @@ client.on('connect', ()=>{
 });
 
 
-u('#send').on('click',()=>{
-	client.publish(`${COMMAND_TOPIC}`, 'RUN');
-	//alert(1)
+u('.ctlbtn').on('click',(e)=>{
+	client.publish(`${COMMAND_TOPIC}`, u(e.currentTarget).html().trim());
 })
+
 
 
 
