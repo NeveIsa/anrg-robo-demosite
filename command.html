@@ -98,6 +98,10 @@ if(!MQTT_HOST) alert('Provide MQTT_HOST using GET parameter: host=broker.emqx.io
 if(!MQTT_PORT) alert('Provide MQTT_PORT using GET parameter: port=8883')
 //if(!ROBO_ID) alert('Provide ROBO_ID using GET parameter: roboID')
 
+WS_PROTO = location.protocol=='http:' ? 'ws' : 'wss';
+
+MQTT_URI=`${WS_PROTO}://${MQTT_HOST}:${MQTT_PORT}/mqtt`
+
 
 BASE_TOPIC = 'anrg-robo-demo';
 COMMAND_TOPIC = `${BASE_TOPIC}/command`
@@ -112,10 +116,9 @@ function loginfo(line)
 	u('#info').html(`${new Date().toString()} : ${line} <br> ${last}`)
 }
 
-WS_PROTO = location.protocol=='http:' ? 'ws' : 'wss';
 
 //https://www.eclipse.org/paho/files/jsdoc/Paho.MQTT.Client.html
-client = mqtt.connect(`${WS_PROTO}://${MQTT_HOST}:${MQTT_PORT}/mqtt`);
+client = mqtt.connect(MQTT_URI);
 client.on('disconnect', ()=>{loginfo('disconnected')});
 client.on('packetsent', ()=>{loginfo('sent command')});
 client.on('packetreceive',  (pkt)=>{loginfo(`CMD=${pkt.cmd} | got PAYLOAD=${pkt.payload} on TOPIC=${pkt.topic}`)});
@@ -135,7 +138,7 @@ u('#send').on('click',()=>{
 
 
 
-u('#info').html(`<br> HOST : ${MQTT_HOST}<br>PORT : ${MQTT_PORT} <br> COMMAND_TOPIC : ${COMMAND_TOPIC} <br> LISTENING_ON : ${BASE_TOPIC}/#`)
+u('#info').html(`<br> MQTT_URI : ${MQTT_URI}<br> COMMAND_TOPIC : ${COMMAND_TOPIC} <br> LISTENING_ON : ${BASE_TOPIC}/#`)
 
 </script>
 
