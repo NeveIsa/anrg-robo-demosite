@@ -92,10 +92,10 @@ MQTT_HOST = $_GET['host'];
 if(!MQTT_PORT) MQTT_PORT = 8083;
 if(!MQTT_HOST) MQTT_HOST = 'broker.emqx.io'
 
-if(location.protocol=='https:') MQTT_URL = 8084;
+if(location.protocol=='https:') MQTT_PORT = 8084;
 
 if(!MQTT_HOST) alert('Provide MQTT_HOST using GET parameter: host=broker.emqx.io')
-if(!MQTT_PORT) alert('Provide MQTT_PORT using GET parameter: port=8883')
+if(!MQTT_PORT) alert('Provide MQTT_PORT using GET parameter: port=8083(ws)/8084(wss)')
 //if(!ROBO_ID) alert('Provide ROBO_ID using GET parameter: roboID')
 
 WS_PROTO = location.protocol=='http:' ? 'ws' : 'wss';
